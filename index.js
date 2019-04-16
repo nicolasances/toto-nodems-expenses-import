@@ -2,7 +2,7 @@ var Controller = require('toto-api-controller');
 
 var postUCFile = require('./dlg/PostUCFile');
 
-var apiName = 'app-expenses';
+var apiName = 'card-importcsv';
 
 var api = new Controller(apiName);
 
