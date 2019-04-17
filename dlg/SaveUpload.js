@@ -12,9 +12,6 @@ exports.do = function(upload) {
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
-      console.log(err);
-      console.log(db);
-
       db.db(config.dbName).collection(config.collections.uploads).insertOne(upload, function(err, res) {
 
         db.close();
