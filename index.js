@@ -2,10 +2,10 @@ var Controller = require('toto-api-controller');
 
 var postUCFile = require('./dlg/PostUCFile');
 
-var apiName = 'card-importcsv';
+var apiName = 'expenses-import';
 
 var api = new Controller(apiName);
 
-api.fileUploadPath('/files/uc/:yearMonth', postUCFile);
+api.fileUploadPath('/uploads/uc/:yearMonth', postUCFile);
 
 api.listen();

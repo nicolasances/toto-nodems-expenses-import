@@ -1,5 +1,6 @@
-
+var moment = require('moment-timezone');
 var parser = require('../parser/uc/CSVParser');
+var saveUpload = require('./SaveUpload');
 
 exports.do = (req) => {
 
@@ -29,7 +30,27 @@ exports.do = (req) => {
         }
       }
 
-      success({result: 'success', expensesCount: expenses.length, total: totalAmount});
+      // Upload
+      // TODO: add the user mail
+      let upload = {
+        yearMonth: yearMonth,
+        count: expenses.length,
+        total: totalAmount,
+        uploadedOn: moment().tz('Europe/Rome').format('YYYYMMDD'),
+        expenses: expenses,
+      }
+
+      // Save the uploads to DB
+      saveUpload.do(upload).then((data) => {
+
+        // Update the id, remove the expenses to avoid unnecessary traffic
+        upload.id = data.id;
+        upload.expenses = null;
+
+        // Return as a success
+        success(upload);
+
+      });
 
     }, failure);
 
