@@ -12,6 +12,8 @@ exports.do = function(upload) {
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
+      console.log(upload);
+
       db.db(config.dbName).collection(config.collections.uploads).insertMany(upload, function(err, res) {
 
         console.log(err);
