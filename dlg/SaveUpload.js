@@ -1,6 +1,8 @@
 var mongo = require('mongodb');
 var config = require('../config');
 
+var MongoClient = mongo.MongoClient;
+
 /**
  * Saves the upload to DB
  */
