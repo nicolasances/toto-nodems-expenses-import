@@ -3,16 +3,14 @@ var config = require('../config');
 
 var MongoClient = mongo.MongoClient;
 
-console.log(config);
-
 /**
  * Saves the upload to DB
  */
 exports.do = function(upload) {
 
-  console.log(config);
+  return new Promise(function(success, failure) {
 
-  return new Promise((success, failure) => {
+    console.log(config);
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
