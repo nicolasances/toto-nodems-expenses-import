@@ -6,9 +6,6 @@ exports.do = (req) => {
 
   return new Promise((success, failure) => {
 
-    // Validation
-    if (!req.params.yearMonth) {failure({code: 400, message: 'You need to provide the yearMonth YYYYMM as the last element of the path. E.g. /files/uc/201903'}); return;}
-
     // Get the file path
     let path = req.body.filepath;
 
