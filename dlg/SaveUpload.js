@@ -16,6 +16,8 @@ exports.do = function(upload) {
 
         db.close();
 
+        console.log(res);
+
         success({ids: res.insertedIds});
 
       });
