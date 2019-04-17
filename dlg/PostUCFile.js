@@ -12,47 +12,70 @@ exports.do = (req) => {
     // Get the file path
     let path = req.body.filepath;
 
-    // Get the year month
-    let yearMonth = req.params.yearMonth;
-
     // Parse
     parser.do(path).then((data) => {
 
       if (data == null || data.expenses == null || data.expenses.length == 0) {success({result: 'no-data'}); return;}
 
-      // Extract only the expenses for the specified year month
-      let expenses = [];
-      let totalAmount = 0;
-      for (var i = 0; i < data.expenses.length; i++) {
-        if (data.expenses[i].date.substring(0, 6) == yearMonth) {
-          expenses.push(data.expenses[i]);
-          totalAmount += data.expenses[i].amount;
-        }
-      }
-
-      // Upload
-      // TODO: add the user mail
-      let upload = {
-        yearMonth: yearMonth,
-        count: expenses.length,
-        total: totalAmount,
-        uploadedOn: moment().tz('Europe/Rome').format('YYYYMMDD'),
-        expenses: expenses,
-      }
+      // Extract the expenses and cluster them per yearMonth
+      let months = aggregatePerYearMonth(data.expenses);
 
       // Save the uploads to DB
-      saveUpload.do(upload).then((data) => {
+      saveUpload.do({months: months}).then((data) => {
 
-        // Update the id, remove the expenses to avoid unnecessary traffic
-        upload.id = data.id;
-        upload.expenses = null;
+        // Create the result
+        let result = {months: []};
+
+        for (var i = 0; i < months.length; i++) {
+          result.months.push({
+            id: data.ids.get(i),
+            yearMonth: months[i].yearMonth,
+            uploadedOn: months[i].uploadedOn,
+            total: months[i].total,
+            count: months[i].count
+          })
+        }
 
         // Return as a success
-        success(upload);
+        success(result);
 
       });
 
     }, failure);
 
   })
+}
+
+/**
+ * Divide the expenses per yearMonth
+ * Returns a [{yearMonth, uploadedOn, expenses: [], total, count}, {}, ...]
+ */
+var aggregatePerYearMonth = (expenses) => {
+
+  let date = moment().tz('Europe/Rome').format('YYYYMMDD');
+
+  let months = {};
+
+  for (var i = 0; i < data.expenses.length; i++) {
+
+    let expense = data.expenses[i];
+
+    // Define year month
+    let yearMonth = expense.date.substring(0, 6);
+
+    if (months[yearMonth] == null) months[yearMonth] = {
+      yearMonth: yearMonth,
+      uploadedOn: date,
+      expenses: [],
+      total: 0,
+      count: 0
+    };
+
+    months[yearMonth].expenses.push(expense);
+    months[yearMonth].total += expense.amount;
+    months[yearMonth].count++;
+  }
+
+  return months.values();
+
 }

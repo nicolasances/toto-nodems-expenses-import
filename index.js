@@ -6,6 +6,6 @@ var apiName = 'expenses-import';
 
 var api = new Controller(apiName);
 
-api.fileUploadPath('/uploads/uc/:yearMonth', postUCFile);
+api.fileUploadPath('/uploads/uc', postUCFile);
 
 api.listen();

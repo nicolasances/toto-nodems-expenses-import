@@ -12,11 +12,11 @@ exports.do = function(upload) {
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
-      db.db(config.dbName).collection(config.collections.uploads).insertOne(upload, function(err, res) {
+      db.db(config.dbName).collection(config.collections.uploads).insertMany(upload, function(err, res) {
 
         db.close();
 
-        success({id: res.insertedId});
+        success({ids: res.insertedIds});
 
       });
 
