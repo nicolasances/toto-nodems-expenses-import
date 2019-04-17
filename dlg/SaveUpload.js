@@ -1,3 +1,5 @@
+var mongo = require('mongodb');
+var config = require('../config');
 
 /**
  * Saves the upload to DB
