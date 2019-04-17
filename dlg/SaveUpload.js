@@ -14,8 +14,6 @@ exports.do = function(upload) {
 
       db.db(config.dbName).collection(config.collections.uploads).insertMany(upload.months, function(err, res) {
 
-        console.log(res);
-
         db.close();
 
         success({ids: res.insertedIds});

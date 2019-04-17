@@ -25,7 +25,7 @@ exports.do = (req) => {
 
         for (var i = 0; i < months.length; i++) {
           result.months.push({
-            id: data.ids.get(i),
+            id: data.ids[i],
             yearMonth: months[i].yearMonth,
             uploadedOn: months[i].uploadedOn,
             total: months[i].total,
