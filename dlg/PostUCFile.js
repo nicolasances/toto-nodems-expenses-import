@@ -73,6 +73,6 @@ var aggregatePerYearMonth = (expenses) => {
     months[yearMonth].count++;
   }
 
-  return months.values();
+  return Object.values(months);
 
 }
