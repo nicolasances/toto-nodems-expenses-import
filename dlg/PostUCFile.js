@@ -53,9 +53,9 @@ var aggregatePerYearMonth = (expenses) => {
 
   let months = {};
 
-  for (var i = 0; i < data.expenses.length; i++) {
+  for (var i = 0; i < expenses.length; i++) {
 
-    let expense = data.expenses[i];
+    let expense = expenses[i];
 
     // Define year month
     let yearMonth = expense.date.substring(0, 6);
