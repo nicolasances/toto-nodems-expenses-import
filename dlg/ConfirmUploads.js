@@ -1,5 +1,6 @@
+var mongo = require('mongodb');
 var config = require('../config');
-var totoEventPublisher = require('toto-event-publisher');
+var postExpenses = require('./PostExpenses');
 
 var MongoClient = mongo.MongoClient;
 
@@ -18,16 +19,12 @@ exports.do = function(req) {
 
       let month = req.body.months[i];
 
-      // Create the event
-      let event = {
-        correlationId: req.headers['x-correlation-id'],
-        month: month
-      }
+      // If the month has been selected, post the expenses
+      if (month.selected) postExpenses.do({headers: req.headers, body: {month: month}});
 
-      // If the month has been selected, publish the event
-      if (month.selected) totoEventPublisher.publishEvent('trainingSessionsCreated', event);
-      
     }
+
+    success({sent: true, message: 'The request has been sent and taken in charge. The expenses will appear later.'});
 
   });
 
