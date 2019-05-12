@@ -29,7 +29,7 @@ exports.do = function(req) {
         for (var i = 0; i < expenses.length; i++) {
 
           // Create the expense
-          postExpense.do({headers: req.headers, body: expenses[i]});
+          postExpense.do({headers: req.headers, body: {user: req.body.user, expense: expenses[i]}});
 
         }
 

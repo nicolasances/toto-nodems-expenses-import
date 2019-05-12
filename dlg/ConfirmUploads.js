@@ -12,7 +12,8 @@ exports.do = function(req) {
   return new Promise(function(success, failure) {
 
     // Validation: an array called 'months' must be passed
-    if (!req.body.months) {failure({code: 400, message: 'A "months" array must be passed. The array must contain the id of a previously uploaded month.'})}
+    if (!req.body.months) {failure({code: 400, message: 'A "months" array must be passed. The array must contain the id of a previously uploaded month.'}); return;}
+    if (!req.body.user) {failure({code: 400, message: 'A "user" must be passed.'}); return; }
 
     // Get the selected months
     for (var i = 0; i < req.body.months.length; i++) {
@@ -20,7 +21,7 @@ exports.do = function(req) {
       let month = req.body.months[i];
 
       // If the month has been selected, post the expenses
-      if (month.selected) postExpenses.do({headers: req.headers, body: {month: month}});
+      if (month.selected) postExpenses.do({headers: req.headers, body: {user: req.body.user, month: month}});
 
     }
 
