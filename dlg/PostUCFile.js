@@ -18,7 +18,7 @@ exports.do = (req) => {
       if (data == null || data.expenses == null || data.expenses.length == 0) {success({result: 'no-data'}); return;}
 
       // Extract the expenses and cluster them per yearMonth
-      let months = aggregatePerYearMonth(data.expenses);
+      let months = aggregatePerYearMonth(data.expenses, req.query.user);
 
       // Save the uploads to DB
       saveUpload.do({months: months}).then((data) => {
@@ -50,7 +50,7 @@ exports.do = (req) => {
  * Divide the expenses per yearMonth
  * Returns a [{yearMonth, uploadedOn, expenses: [], total, count}, {}, ...]
  */
-var aggregatePerYearMonth = (expenses) => {
+var aggregatePerYearMonth = (expenses, user) => {
 
   let date = moment().tz('Europe/Rome').format('YYYYMMDD');
 
@@ -68,7 +68,8 @@ var aggregatePerYearMonth = (expenses) => {
       uploadedOn: date,
       expenses: [],
       total: 0,
-      count: 0
+      count: 0,
+      user: user
     };
 
     months[yearMonth].expenses.push(expense);
