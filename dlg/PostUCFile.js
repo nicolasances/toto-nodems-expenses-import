@@ -7,7 +7,7 @@ exports.do = (req) => {
   return new Promise((success, failure) => {
 
     // Validation
-    if (!req.body.user) {failure({code: 400, message: 'The user is mandatory to upload expenses.'}); return; }
+    if (!req.query.user) {failure({code: 400, message: 'The user is mandatory (query param) to upload expenses.'}); return; }
 
     // Get the file path
     let path = req.body.filepath;
