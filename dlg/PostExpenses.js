@@ -15,7 +15,7 @@ exports.do = function(req) {
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
-      db.db(config.dbName).collection(config.collections.uploads).find({id: req.body.month.id}).toArray(function(err, docs) {
+      db.db(config.dbName).collection(config.collections.uploads).find({_id: new mongo.ObjectId(req.body.month.id)}).toArray(function(err, docs) {
 
         db.close();
 
