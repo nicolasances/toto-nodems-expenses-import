@@ -5,7 +5,7 @@ var http = require('toto-request');
  */
 exports.do = function(req) {
 
-  let payment = req.body.user;
+  let payment = req.body.expense;
   let correlationId = req.headers['x-correlation-id'];
 
   return new Promise(function(success, failure) {
