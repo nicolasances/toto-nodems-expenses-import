@@ -19,7 +19,7 @@ exports.do = function(req) {
 
         if (docs == null || docs.length == 0) {success({}); return;}
 
-        success(converter.toTO(docs[0]));
+        success(converter.toTOFull(docs[0]));
 
       });
 
