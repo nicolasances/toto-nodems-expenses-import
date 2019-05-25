@@ -26,6 +26,8 @@ exports.do = function(req) {
         correlationId: req.headers['x-correlation-id'],
         id: month.id
       });
+      
+    }
 
     success({sent: true, message: 'The request has been sent and taken in charge. The expenses will appear later.'});
 
