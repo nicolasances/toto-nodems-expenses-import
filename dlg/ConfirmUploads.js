@@ -24,7 +24,7 @@ exports.do = function(req) {
       // If the month has been selected, post the expenses
       if (month.selected) totoEventPublisher.publishEvent('expensesUploadConfirmed', {
         correlationId: req.headers['x-correlation-id'],
-        id: month.id
+        monthId: month.id
       });
 
     }
