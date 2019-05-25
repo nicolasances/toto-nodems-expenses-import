@@ -5,6 +5,7 @@ var postUCFile = require('./dlg/PostUCFile');
 var getUploads = require('./dlg/GetUploads');
 var deleteAllUploads = require('./dlg/DeleteAllUploads');
 var confirmUploads = require('./dlg/ConfirmUploads');
+var getUpload = require('./dlg/GetUpload');
 
 var apiName = 'expenses-import';
 
@@ -15,6 +16,7 @@ var api = new Controller(apiName);
 
 api.path('GET', '/uploads', getUploads);
 api.path('DELETE', '/uploads', deleteAllUploads);
+api.path('GET', '/uploads/:id', getUpload);
 
 api.path('POST', '/uploads/confirm', confirmUploads);
 
