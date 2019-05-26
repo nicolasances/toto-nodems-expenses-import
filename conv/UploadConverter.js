@@ -5,7 +5,8 @@ exports.toTO = (po) => {
     yearMonth: po.yearMonth,
     uploadedOn: po.uploadedOn,
     total: po.total,
-    count: po.count
+    count: po.count,
+    user: po.user
   }
 }
 
@@ -19,6 +20,7 @@ exports.toTOFull = (po) => {
     uploadedOn: po.uploadedOn,
     total: po.total,
     count: po.count,
+    user: po.user,
     expenses: po.expenses
   }
 }
