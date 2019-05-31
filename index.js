@@ -6,6 +6,7 @@ var getUploads = require('./dlg/GetUploads');
 var deleteAllUploads = require('./dlg/DeleteAllUploads');
 var confirmUploads = require('./dlg/ConfirmUploads');
 var getUpload = require('./dlg/GetUpload');
+var putUpload = require('./dlg/PutUpload');
 
 var apiName = 'expenses-import';
 
@@ -18,7 +19,7 @@ api.path('GET', '/uploads', getUploads);
 api.path('DELETE', '/uploads', deleteAllUploads);
 
 api.path('GET', '/uploads/:monthId', getUpload);
-api.path('PUT', '/uploads/:monthId', getUpload);
+api.path('PUT', '/uploads/:monthId', putUpload);
 
 api.path('POST', '/uploads/confirm', confirmUploads);
 
