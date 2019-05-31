@@ -22,6 +22,7 @@ exports.toTOFull = (po) => {
     total: po.total,
     count: po.count,
     user: po.user,
+    status: po.status,
     expenses: po.expenses
   }
 }
