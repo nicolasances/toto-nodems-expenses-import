@@ -1,0 +1,3 @@
+
+exports.INPROGRESS = 'INPROGRESS';
+exports.POSTED = 'POSTED';

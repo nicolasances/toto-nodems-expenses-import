@@ -17,7 +17,8 @@ var api = new Controller(apiName);
 api.path('GET', '/uploads', getUploads);
 api.path('DELETE', '/uploads', deleteAllUploads);
 
-api.path('GET', '/uploads/:id', getUpload);
+api.path('GET', '/uploads/:monthId', getUpload);
+api.path('PUT', '/uploads/:monthId', getUpload);
 
 api.path('POST', '/uploads/confirm', confirmUploads);
 

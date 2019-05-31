@@ -3,10 +3,13 @@ var config = require('../config');
 var postExpenses = require('./PostExpenses');
 var totoEventPublisher = require('toto-event-publisher');
 
+var Status = require('./Status');
+var putUpload = require('./PutUpload');
+
 var MongoClient = mongo.MongoClient;
 
 /**
- * Saves the upload to DB
+ * Confirms some of the months so that the expenses of that month can be posted.
  */
 exports.do = function(req) {
 
@@ -22,10 +25,17 @@ exports.do = function(req) {
       let month = req.body.months[i];
 
       // If the month has been selected, post the expenses
-      if (month.selected) totoEventPublisher.publishEvent('expensesUploadConfirmed', {
-        correlationId: req.headers['x-correlation-id'],
-        monthId: month.id
-      });
+      if (month.selected) {
+
+        // 1. Set the status as "in progress"
+        putUpload.do({params: {monthId: month.id}, body: {status: Status.INPROGRESS}});
+
+        // 2. Post the expense
+        totoEventPublisher.publishEvent('expensesUploadConfirmed', {
+          correlationId: req.headers['x-correlation-id'],
+          monthId: month.id
+        });
+      }
 
     }
 
