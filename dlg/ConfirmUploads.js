@@ -41,7 +41,7 @@ exports.do = function(req) {
 
         // Start a poller to check that expenses have actually been posted
         // This will poll the /expenses API and update the status to "POSTED" when all the expenses are found
-        postedExpensesCheck.do(month, correlationId);
+        postedExpensesCheck.do(month, req.body.user, correlationId);
       }
 
     }

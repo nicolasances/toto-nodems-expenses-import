@@ -53,6 +53,8 @@ exports.do = (month, user, correlationId) => {
           setTimeout(poll, 2000);
         }
 
+      }, (err) => {
+        logger.compute(correlationId, 'Error calling /expenses for month [' + data.yearMonth + ']', 'error');
       });
 
     }
