@@ -6,7 +6,8 @@ exports.toTO = (po) => {
     uploadedOn: po.uploadedOn,
     total: po.total,
     count: po.count,
-    user: po.user
+    user: po.user,
+    status: po.status
   }
 }
 
