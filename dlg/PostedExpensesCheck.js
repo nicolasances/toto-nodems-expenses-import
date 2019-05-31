@@ -2,6 +2,7 @@ var http = require('toto-request');
 var logger = require('toto-logger');
 var getUpload = require('./GetUpload');
 var putUpload = require('./PutUpload');
+var Status = require('./Status');
 
 exports.do = (month, user, correlationId) => {
 
