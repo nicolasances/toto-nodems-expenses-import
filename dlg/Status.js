@@ -1,3 +1,4 @@
 
 exports.INPROGRESS = 'INPROGRESS';
 exports.POSTED = 'POSTED';
+exports.INCONSISTENT = 'INCONSISTENT';

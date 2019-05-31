@@ -49,6 +49,12 @@ exports.do = (month, user, correlationId) => {
           // Update
           putUpload.do({params: {monthId: month.id}, body: {status: Status.POSTED}});
         }
+        else if (actualCount > expensesCount) {
+          // Log
+          logger.compute(correlationId, 'Too many expenses found for month [' + data.yearMonth + '], monthId [' + month.id + ']: ' + actualCount + ' (expected ' + expensesCount + ')', 'info');
+          // Update
+          putUpload.do({params: {monthId: month.id}, body: {status: Status.INCONSISTENT}});
+        }
         else if (numberOfPolls < maxPolls) {
           setTimeout(poll, 2000);
         }
