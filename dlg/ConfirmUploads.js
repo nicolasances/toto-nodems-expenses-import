@@ -5,6 +5,7 @@ var totoEventPublisher = require('toto-event-publisher');
 
 var Status = require('./Status');
 var putUpload = require('./PutUpload');
+var postedExpensesCheck = require('./PostedExpensesCheck');
 
 var MongoClient = mongo.MongoClient;
 
@@ -12,6 +13,8 @@ var MongoClient = mongo.MongoClient;
  * Confirms some of the months so that the expenses of that month can be posted.
  */
 exports.do = function(req) {
+
+  let correlationId = req.headers['x-correlation-id'];
 
   return new Promise(function(success, failure) {
 
@@ -32,9 +35,13 @@ exports.do = function(req) {
 
         // 2. Post the expense
         totoEventPublisher.publishEvent('expensesUploadConfirmed', {
-          correlationId: req.headers['x-correlation-id'],
+          correlationId: correlationId,
           monthId: month.id
         });
+
+        // Start a poller to check that expenses have actually been posted
+        // This will poll the /expenses API and update the status to "POSTED" when all the expenses are found
+        postedExpensesCheck.do(month, correlationId);
       }
 
     }
