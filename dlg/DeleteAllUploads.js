@@ -4,7 +4,7 @@ var config = require('../config');
 var MongoClient = mongo.MongoClient;
 
 /**
- * Saves the upload to DB
+ * Deletes all uploads that don't have a status set
  */
 exports.do = function(req) {
 
@@ -15,7 +15,7 @@ exports.do = function(req) {
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
-      db.db(config.dbName).collection(config.collections.uploads).deleteMany({user: req.query.user}).then(() => {
+      db.db(config.dbName).collection(config.collections.uploads).deleteMany({user: req.query.user, status: null}).then(() => {
 
         db.close();
 
