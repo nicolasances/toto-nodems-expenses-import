@@ -16,7 +16,7 @@ exports.do = function(req) {
 
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
-      db.db(config.dbName).collection(config.collections.uploads).find({user: req.query.user}).toArray(function(err, docs) {
+      db.db(config.dbName).collection(config.collections.uploads).find({user: req.query.user}).sort({yearMonth: -1}).toArray(function(err, docs) {
 
         db.close();
 
