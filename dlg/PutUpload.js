@@ -18,7 +18,7 @@ exports.do = function(req) {
     return MongoClient.connect(config.mongoUrl, function(err, db) {
 
       // Create the update
-      let update = {$set: {status: req.body.status}};
+      let update = {$set: {status: req.body.status, statusDescription: req.body.statusDescription}};
 
       // Do the update
       db.db(config.dbName).collection(config.collections.uploads).updateOne({_id: new mongo.ObjectId(req.params.monthId)}, update, function(err, res) {

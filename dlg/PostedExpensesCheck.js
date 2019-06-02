@@ -55,7 +55,7 @@ exports.do = (month, user, correlationId) => {
           // Log
           logger.compute(correlationId, 'Too many expenses found for month [' + data.yearMonth + '], monthId [' + month.id + ']: ' + actualCount + ' (expected ' + expensesCount + ')', 'info');
           // Update
-          putUpload.do({params: {monthId: month.id}, body: {status: Status.INCONSISTENT}});
+          putUpload.do({params: {monthId: month.id}, body: {status: Status.INCONSISTENT, statusDescription: 'Too many payments have been found, there might be duplicates.'}});
         }
         else if (numberOfPolls < maxPolls) {
           setTimeout(poll, 2000);
