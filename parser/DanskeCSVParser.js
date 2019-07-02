@@ -14,9 +14,9 @@ exports.do = (csvFilePath) => {
         let values = Object.values(data[i]);
 
         expenses.push({
-          date: moment(values[0], 'DD/MM/YYYY').format('YYYYMMDD'),
-          amount: parseFloat(values[2].replace('.', '').replace(',', '.')),
-          description: values[1]
+          date: moment(values[0].replace(/\"/g, ''), 'DD/MM/YYYY').format('YYYYMMDD'),
+          amount: parseFloat(values[2].replace(/\"/g, '').replace(',', '')),
+          description: values[1].replace(/\"/g, '')
         });
       }
 
