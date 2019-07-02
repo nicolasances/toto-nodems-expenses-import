@@ -32,7 +32,8 @@ exports.do = (req) => {
             yearMonth: months[i].yearMonth,
             uploadedOn: months[i].uploadedOn,
             total: months[i].total,
-            count: months[i].count
+            count: months[i].count,
+            currency: months[i].currency
           })
         }
 
@@ -69,7 +70,8 @@ var aggregatePerYearMonth = (expenses, user) => {
       expenses: [],
       total: 0,
       count: 0,
-      user: user
+      user: user,
+      currency: 'DKK'
     };
 
     months[yearMonth].expenses.push(expense);
