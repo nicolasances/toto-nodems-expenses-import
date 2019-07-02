@@ -1,5 +1,5 @@
 var moment = require('moment-timezone');
-var parser = require('../parser/UniCreditCSVParser');
+var parser = require('../parser/DanskeCSVParser');
 var saveUpload = require('./SaveUpload');
 
 exports.do = (req) => {
@@ -59,6 +59,8 @@ var aggregatePerYearMonth = (expenses, user) => {
   for (var i = 0; i < expenses.length; i++) {
 
     let expense = expenses[i];
+
+    if (expense.amount >= 0) continue;
 
     // Define year month
     let yearMonth = expense.date.substring(0, 6);

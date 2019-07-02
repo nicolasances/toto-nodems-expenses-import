@@ -2,6 +2,7 @@ var Controller = require('toto-api-controller');
 var totoEventPublisher = require('toto-event-publisher');
 
 var postUCFile = require('./dlg/PostUCFile');
+var postDanskeFile = require('./dlg/PostDanskeFile');
 var getUploads = require('./dlg/GetUploads');
 var deleteAllUploads = require('./dlg/DeleteAllUploads');
 var confirmUploads = require('./dlg/ConfirmUploads');
@@ -24,5 +25,6 @@ api.path('PUT', '/uploads/:monthId', putUpload);
 api.path('POST', '/uploads/confirm', confirmUploads);
 
 api.fileUploadPath('/uploads/uc', postUCFile);
+api.fileUploadPath('/uploads/danske', postDanskeFile);
 
 api.listen();
