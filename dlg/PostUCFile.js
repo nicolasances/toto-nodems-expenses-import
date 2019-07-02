@@ -71,7 +71,7 @@ var aggregatePerYearMonth = (expenses, user) => {
       total: 0,
       count: 0,
       user: user,
-      currency: 'DKK'
+      currency: 'EUR'
     };
 
     months[yearMonth].expenses.push(expense);
