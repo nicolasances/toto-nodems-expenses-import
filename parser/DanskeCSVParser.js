@@ -14,11 +14,16 @@ exports.do = (csvFilePath) => {
         let values = Object.values(data[i]);
 
         // Check whether ',' or '.' is used as a decimal separator
-        // TODO
+        let commaDecSeparator = commaSeparator(values[2]);
+
+        // Define the amount 
+        let amtString = values[2].replace(/\"/g, '');
+        if (!commaDecSeparator) amtString = amtString.replace(',', '');
+        else amtString.replace(',', '.');
 
         expenses.push({
           date: moment(values[0].replace(/\"/g, ''), 'DD/MM/YYYY').format('YYYYMMDD'),
-          amount: parseFloat(values[2].replace(/\"/g, '').replace(',', '')),
+          amount: parseFloat(amtString),
           description: values[1].replace(/\"/g, ''),
           currency: 'DKK'
         });
@@ -44,6 +49,13 @@ var commaSeparator = (amount) => {
 
   if (!amount) return false;
 
-  if (amount.indexOf(',') == -1) return false;
+  let commaIndex = amount.indexOf(',');
+
+  if (commaIndex == -1) return false;
+
+  // If there are only two chars after the comma
+  if (commaIndex == amount.length - 3) return true;
+
+  return false;
 
 }
