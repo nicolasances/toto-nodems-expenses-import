@@ -19,7 +19,7 @@ exports.do = (csvFilePath) => {
         // Define the amount 
         let amtString = values[2].replace(/\"/g, '');
         if (!commaDecSeparator) amtString = amtString.replace(',', '');
-        else amtString.replace(',', '.');
+        else amtString = amtString.replace(',', '.');
 
         console.log(amtString);
 
