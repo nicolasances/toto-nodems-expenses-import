@@ -21,6 +21,8 @@ exports.do = (csvFilePath) => {
         if (!commaDecSeparator) amtString = amtString.replace(',', '');
         else amtString.replace(',', '.');
 
+        console.log(amtString);
+
         expenses.push({
           date: moment(values[0].replace(/\"/g, ''), 'DD/MM/YYYY').format('YYYYMMDD'),
           amount: parseFloat(amtString),
@@ -28,8 +30,6 @@ exports.do = (csvFilePath) => {
           currency: 'DKK'
         });
 
-        console.log(expenses);
-        
       }
 
       success({expenses: expenses});
