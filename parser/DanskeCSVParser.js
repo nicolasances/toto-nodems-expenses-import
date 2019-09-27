@@ -21,6 +21,10 @@ exports.do = (csvFilePath) => {
         if (!commaDecSeparator) amtString = amtString.replace(',', '');
         else amtString = amtString.replace(',', '.');
 
+        // Remove and expense that is already reconciled (only for Danske)
+        let reconciledString = values[5];
+        if (reconciledString.indexOf('Ja') != -1) continue;
+
         expenses.push({
           date: moment(values[0].replace(/\"/g, ''), 'DD/MM/YYYY').format('YYYYMMDD'),
           amount: parseFloat(amtString),
