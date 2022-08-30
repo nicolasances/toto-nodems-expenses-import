@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "csvtojson": "^2.0.8",
-    "moment-timezone": "^0.5.23",
+    "moment-timezone": "^0.5.35",
     "mongodb": "^3.1.0-beta4",
     "toto-api-controller": "^4.7.2",
     "toto-event-publisher": "6.2.0",
